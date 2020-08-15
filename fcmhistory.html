@@ -7,13 +7,14 @@
 
 <body onload="init()">
     <h1>Hello World!</h1>
-    <form onsubmit="onSubmit()">
+    <form onsubmit="onUpload()">
         <input id="file-input" type="file" />
         <button type="submit">Upload</button>
     </form>
 
     <script>
         let file;
+
 
         function init() {
             let input = document.getElementById('file-input');
@@ -22,9 +23,15 @@
             }
         }
 
-        function onSubmit() {
+        function onUpload() {
             event.preventDefault()
-            console.log('name:',file.name)
+
+            let reader = new FileReader();
+            reader.readAsText(file, 'UTF-8');
+            reader.onload = readerEvent => {
+                let content = readerEvent.target.result;
+                console.log(content);
+            }
         }
 
     </script>
