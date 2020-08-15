@@ -36,13 +36,17 @@
         function parseContent(content) {
             var lines = content.split(/[\r\n]+/g);
             const timestamp_regex = /^[0-9]{4}[\/][0-9]{2}[\/][0-9]{2}/g;
+            const trains_regex = /trains :/g;
+            const uses_regex = /uses his\/her team :/g;
             let messages = [];
             let last_message = {
                 body: []
             };
+            let trains = [];
+            let uses = [];
+            let other = [];
             lines.forEach(function(line, idx) {
-                let is_timestamp = timestamp_regex.test(line)
-                if (is_timestamp) {
+                if (timestamp_regex.test(line)) {
                     messages.push(last_message);
                     last_message = {
                         timestamp: line,
@@ -50,10 +54,20 @@
                     }
                 } else {
                     last_message['body'].push(line);
+                    if (uses_regex.test(line)) {
+                        uses.push(line);
+                    } else if (trains_regex.test(line)) {
+                        trains.push(line);
+                    } else {
+                        other.push(line);
+                    }
                 }
             })
-            console.log('ALL MESSAGES:', messages)
-            console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length)
+            console.log('ALL MESSAGES:', messages);
+            console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length);
+            console.log('uses:',uses);
+            console.log('trains:',trains);
+            console.log('other:',other);
         }
 
     </script>
