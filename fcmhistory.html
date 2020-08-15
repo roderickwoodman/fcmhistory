@@ -36,14 +36,20 @@
         function parseContent(content) {
             var lines = content.split(/[\r\n]+/g);
             const timestamp_regex = /^[0-9]{4}[\/][0-9]{2}[\/][0-9]{2}/g;
-            const trains_regex = /trains :/g;
             const uses_regex = /uses his\/her team :/g;
+            const trains_regex = /trains :/g;
+            const hires_regex = /hires :/g;
+            const fires_regex = /fires/g;
+            const restaurant_regex = /restaurant/g;
             let messages = [];
             let last_message = {
                 body: []
             };
-            let trains = [];
             let uses = [];
+            let trains = [];
+            let hires = [];
+            let fires = [];
+            let restaurant = [];
             let other = [];
             lines.forEach(function(line, idx) {
                 if (timestamp_regex.test(line)) {
@@ -58,15 +64,24 @@
                         uses.push(line);
                     } else if (trains_regex.test(line)) {
                         trains.push(line);
+                    } else if (hires_regex.test(line)) {
+                        hires.push(line);
+                    } else if (fires_regex.test(line)) {
+                        fires.push(line);
+                    } else if (restaurant_regex.test(line)) {
+                        restaurant.push(line);
                     } else {
                         other.push(line);
                     }
                 }
             })
-            console.log('ALL MESSAGES:', messages);
+            // console.log('ALL MESSAGES:', messages);
             console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length);
-            console.log('uses:',uses);
-            console.log('trains:',trains);
+            // console.log('uses:',uses);
+            // console.log('trains:',trains);
+            console.log('hires:',hires);
+            // console.log('fires:',fires);
+            console.log('restaurant:',restaurant);
             console.log('other:',other);
         }
 
