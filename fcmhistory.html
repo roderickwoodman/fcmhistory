@@ -15,7 +15,6 @@
     <script>
         let file;
 
-
         function init() {
             let input = document.getElementById('file-input');
             input.onchange = e => {
@@ -30,8 +29,22 @@
             reader.readAsText(file, 'UTF-8');
             reader.onload = readerEvent => {
                 let content = readerEvent.target.result;
-                console.log(content);
+                parseContent(content);
             }
+        }
+
+        function parseContent(content) {
+            var lines = content.split(/[\r\n]+/g);
+            const regex = /^[0-9]{4}[\/][0-9]{2}[\/][0-9]{2}/g;
+            let messages = [];
+            let last_message = [];
+            lines.forEach(function(line, idx) {
+                let is_timestamp = regex.test(line)
+                if (!is_timestamp) {
+                    console.log('['+idx+']: '+ line)
+                }
+            })
+            console.log(lines.length)
         }
 
     </script>
