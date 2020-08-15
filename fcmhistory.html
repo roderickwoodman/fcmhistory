@@ -44,7 +44,10 @@
                 let is_timestamp = timestamp_regex.test(line)
                 if (is_timestamp) {
                     messages.push(last_message);
-                    last_message['timestamp'] = line;
+                    last_message = {
+                        timestamp: line,
+                        body: []
+                    }
                 } else {
                     last_message['body'].push(line);
                 }
