@@ -5,8 +5,29 @@
 
 </head>
 
-<body>
+<body onload="init()">
     <h1>Hello World!</h1>
+    <form onsubmit="onSubmit()">
+        <input id="file-input" type="file" />
+        <button type="submit">Upload</button>
+    </form>
+
+    <script>
+        let file;
+
+        function init() {
+            let input = document.getElementById('file-input');
+            input.onchange = e => {
+                file = e.target.files[0];
+            }
+        }
+
+        function onSubmit() {
+            event.preventDefault()
+            console.log('name:',file.name)
+        }
+
+    </script>
 </body>
 
 </html>
