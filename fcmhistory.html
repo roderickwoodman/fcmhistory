@@ -35,16 +35,20 @@
 
         function parseContent(content) {
             var lines = content.split(/[\r\n]+/g);
-            const regex = /^[0-9]{4}[\/][0-9]{2}[\/][0-9]{2}/g;
+            const timestamp_regex = /^[0-9]{4}[\/][0-9]{2}[\/][0-9]{2}/g;
             let messages = [];
             let last_message = [];
             lines.forEach(function(line, idx) {
-                let is_timestamp = regex.test(line)
-                if (!is_timestamp) {
-                    console.log('['+idx+']: '+ line)
+                let is_timestamp = timestamp_regex.test(line)
+                if (is_timestamp) {
+                    messages.push(last_message);
+                    last_message = [line];
+                } else {
+                    last_message.push(line);
                 }
             })
-            console.log(lines.length)
+            console.log('ALL MESSAGES:',messages)
+            console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length)
         }
 
     </script>
