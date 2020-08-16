@@ -14,6 +14,8 @@
 
     <script>
         let file;
+        var file_content;
+        var content;
 
         function init() {
             let input = document.getElementById('file-input');
@@ -28,12 +30,13 @@
             let reader = new FileReader();
             reader.readAsText(file, 'UTF-8');
             reader.onload = readerEvent => {
-                let content = readerEvent.target.result;
-                parseContent(content);
+                file_content = readerEvent.target.result;
+                parseContent();
             }
         }
 
-        function parseContent(content) {
+        function parseContent() {
+            content = JSON.parse(JSON.stringify(file_content));
             var lines = content.split(/[\r\n]+/g);
             const timestamp_regex = /^[0-9]{4}[\/][0-9]{2}[\/][0-9]{2}/g;
             const turns_regex = /Start of turn/g;
@@ -69,48 +72,55 @@
                 } else {
                     last_message['body'].push(line);
                     if (turns_regex.test(line)) {
-                        turns.push(line);
+                        turns.push(idx);
                     } else if (restaurant_regex.test(line)) {
-                        restaurant.push(line);
+                        restaurant.push(idx);
                     } else if (uses_regex.test(line)) {
-                        uses.push(line);
+                        uses.push(idx);
                     } else if (plays_regex.test(line)) {
-                        plays.push(line);
+                        plays.push(idx);
                     } else if (works_regex.test(line)) {
-                        works.push(line);
+                        works.push(idx);
                     } else if (markets_regex.test(line)) {
-                        markets.push(line);
+                        markets.push(idx);
                     } else if (trains_regex.test(line)) {
-                        trains.push(line);
+                        trains.push(idx);
                     } else if (hires_regex.test(line)) {
-                        hires.push(line);
+                        hires.push(idx);
                     } else if (fires_regex.test(line)) {
-                        fires.push(line);
+                        fires.push(idx);
                     } else {
-                        other.push(line);
+                        other.push(idx);
                     }
                 }
             })
+            console.log('CONTENT:', content);
             let players = [];
-            plays.forEach(function(play) {
-                let new_player = play.split(' ')[0];
+            plays.forEach(function(play_idx) {
+                let new_player = content[play_idx].split(' ')[0];
                 if (!players.includes(new_player)) {
                     players.push(new_player);
                 }
             })
             // console.log('ALL MESSAGES:', messages);
             console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length);
-            // console.log('turns:',turns);
+            console.log('content.length:',content.length);
+            console.log('turns_idx:',turns);
+            console.log('turns_idx[0]:',turns[0]);
+            let content_idx = turns[0];
+            console.log('typeof content:',typeof content);
+            console.log('content[133]:',content[133]);
+            // console.log('content[turn_idx[0]]:',content[content_idx]);
             // console.log('restaurant:',restaurant);
             // console.log('uses:',uses);
             // console.log('plays:',plays);
             // console.log('works:',works);
             // console.log('markets:',markets);
-            // console.log('trains:',trains);
-            // console.log('hires:',hires);
+            console.log('trains:',trains);
+            console.log('hires:',hires);
             // console.log('fires:',fires);
             // console.log('other:',other);
-            // console.log('players:',players);
+            console.log('players:',players);
             console.log('turns='+turns.length
                 +' restaurant='+restaurant.length
                 +' uses='+uses.length
