@@ -40,6 +40,8 @@
             const restaurant_regex = /restaurant/g;
             const uses_regex = /uses his\/her team :/g;
             const plays_regex = /(chooses to play|has to play)/g;
+            const works_regex = /sends to work/g;
+            const markets_regex = /started the marketing campaign/g;
             const trains_regex = /trains :/g;
             const hires_regex = /hires :/g;
             const fires_regex = /fires/g;
@@ -51,6 +53,8 @@
             let restaurant = [];
             let uses = [];
             let plays = [];
+            let works = [];
+            let markets = [];
             let trains = [];
             let hires = [];
             let fires = [];
@@ -72,6 +76,10 @@
                         uses.push(line);
                     } else if (plays_regex.test(line)) {
                         plays.push(line);
+                    } else if (works_regex.test(line)) {
+                        works.push(line);
+                    } else if (markets_regex.test(line)) {
+                        markets.push(line);
                     } else if (trains_regex.test(line)) {
                         trains.push(line);
                     } else if (hires_regex.test(line)) {
@@ -83,16 +91,37 @@
                     }
                 }
             })
+            let players = [];
+            plays.forEach(function(play) {
+                let new_player = play.split(' ')[0];
+                if (!players.includes(new_player)) {
+                    players.push(new_player);
+                }
+            })
             // console.log('ALL MESSAGES:', messages);
             console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length);
             // console.log('turns:',turns);
             // console.log('restaurant:',restaurant);
             // console.log('uses:',uses);
             // console.log('plays:',plays);
+            // console.log('works:',works);
+            // console.log('markets:',markets);
             // console.log('trains:',trains);
             // console.log('hires:',hires);
             // console.log('fires:',fires);
-            console.log('other:',other);
+            // console.log('other:',other);
+            // console.log('players:',players);
+            console.log('turns='+turns.length
+                +' restaurant='+restaurant.length
+                +' uses='+uses.length
+                +' plays='+plays.length
+                +' works='+works.length
+                +' markets='+markets.length
+                +' trains='+trains.length
+                +' hires='+hires.length
+                +' fires='+fires.length
+                +' other='+other.length
+                +' players='+players.length)
         }
 
     </script>
