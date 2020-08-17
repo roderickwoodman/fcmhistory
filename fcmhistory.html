@@ -2,6 +2,15 @@
 <html>
 
 <head>
+    <style>
+        .row {
+            display: flex;
+            flex-direction: row;
+        }
+        .cell {
+            border: 1px solid silver;
+        }
+    </style>
 
 </head>
 
@@ -160,7 +169,9 @@
 
             // ROW: players
             new_row = document.createElement('div');
+            new_row.classList.add('row');
             new_cell = document.createElement('div');
+            new_row.classList.add('cell');
             new_textnode = document.createTextNode('ROUND');
             new_cell.appendChild(new_textnode);
             new_row.appendChild(new_cell);
@@ -174,7 +185,9 @@
             // ROWS: all turns
             for (let t=0; t<zb_turn_limits.length; t++) {
                 new_row = document.createElement('div');
+                new_row.classList.add('row');
                 new_cell = document.createElement('div');
+                new_row.classList.add('cell');
                 new_textnode = document.createTextNode(t+1);
                 new_cell.appendChild(new_textnode);
                 new_row.appendChild(new_cell);
