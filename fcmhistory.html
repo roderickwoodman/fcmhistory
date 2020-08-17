@@ -20,7 +20,7 @@
     <script>
         let file;
         var content = [];
-        let turns = [];
+        let turns = [], zb_turn_limits = [];
         let restaurant = [];
         let uses = [];
         let plays = [];
@@ -103,22 +103,34 @@
             })
             // console.log('CONTENT:', content);
             plays.forEach(function(play_idx) {
-                // console.log('play_idx='+play_idx);
                 let new_player = content[parseInt(play_idx)].split(' ')[0];
-                // console.log('content['+play_idx+']='+content[parseInt(play_idx)]);
                 if (!players.includes(new_player)) {
                     players.push(new_player);
                 }
             })
+
+            let prev_min = 0;
+            // turns.forEach(function(turn_idx) {
+            for (let t=0; t<turns.length-1; t++) {
+                let turn_idx = parseInt(turns[t]);
+                let new_turn_msg = content[turn_idx].split(' ')
+                let this_turn_num = parseInt(new_turn_msg[new_turn_msg.length - 1])
+                let new_turn_limits = {
+                    start: turn_idx,
+                }
+                zb_turn_limits.push(new_turn_limits);
+                if (t !== 0) {
+                    zb_turn_limits[t-1].end = turn_idx - 1;
+                }
+                zb_turn_limits[zb_turn_limits.length - 1].end = content.length - 1;
+            }
+            console.log(zb_turn_limits)
+
+
             // console.log('ALL MESSAGES:', messages);
             console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length);
             // console.log('content.length:',content.length);
-            // console.log('turns_idx:',turns);
-            // console.log('turns_idx[0]:',turns[0]);
-            // let content_idx = turns[0];
-            // console.log('typeof content:',typeof content);
-            // console.log('content[133]:',content[133]);
-            // console.log('content[turn_idx[0]]:',content[content_idx]);
+            // console.log('turns:',turns);
             // console.log('restaurant:',restaurant);
             // console.log('uses:',uses);
             // console.log('plays:',plays);
