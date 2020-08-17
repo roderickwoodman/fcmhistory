@@ -13,6 +13,10 @@
         <button type="submit">Upload</button>
     </form>
 
+    <div id="report">
+
+    </div>
+
     <script>
         let file;
         var content = [];
@@ -26,6 +30,7 @@
         let hires = [];
         let fires = [];
         let other = [];
+        let players = [];
 
         function init() {
             let input = document.getElementById('file-input');
@@ -97,11 +102,10 @@
                 }
             })
             // console.log('CONTENT:', content);
-            let players = [];
             plays.forEach(function(play_idx) {
-                console.log('play_idx='+play_idx);
+                // console.log('play_idx='+play_idx);
                 let new_player = content[parseInt(play_idx)].split(' ')[0];
-                console.log('content['+play_idx+']='+content[parseInt(play_idx)]);
+                // console.log('content['+play_idx+']='+content[parseInt(play_idx)]);
                 if (!players.includes(new_player)) {
                     players.push(new_player);
                 }
@@ -136,6 +140,21 @@
                 +' fires='+fires.length
                 +' other='+other.length
                 +' players='+players.length)
+        }
+
+        function displayData() {
+            let report = document.getElementById('report');
+
+            let new_list = document.createElement('ul');
+            for (let player of players) {
+                let new_listitem = document.createElement('li');
+                let new_textnode = document.createTextNode(player);
+                new_listitem.appendChild(new_textnode);
+                new_list.appendChild(new_listitem);
+            }
+            report.appendChild(new_list);
+
+
         }
 
     </script>
