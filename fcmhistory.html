@@ -6,6 +6,7 @@
 </head>
 
 <body onload="init()">
+
     <h1>Hello World!</h1>
     <form onsubmit="onUpload()">
         <input id="file-input" type="file" />
@@ -14,8 +15,17 @@
 
     <script>
         let file;
-        var file_content;
-        var content;
+        var content = [];
+        let turns = [];
+        let restaurant = [];
+        let uses = [];
+        let plays = [];
+        let works = [];
+        let markets = [];
+        let trains = [];
+        let hires = [];
+        let fires = [];
+        let other = [];
 
         function init() {
             let input = document.getElementById('file-input');
@@ -30,14 +40,15 @@
             let reader = new FileReader();
             reader.readAsText(file, 'UTF-8');
             reader.onload = readerEvent => {
-                file_content = readerEvent.target.result;
-                parseContent();
+                let file_content = readerEvent.target.result;
+                parseContent(file_content);
+                displayData();
             }
         }
 
-        function parseContent() {
-            content = JSON.parse(JSON.stringify(file_content));
-            var lines = content.split(/[\r\n]+/g);
+        function parseContent(file_content) {
+            let fc = JSON.parse(JSON.stringify(file_content));
+            var lines = fc.split(/[\r\n]+/g);
             const timestamp_regex = /^[0-9]{4}[\/][0-9]{2}[\/][0-9]{2}/g;
             const turns_regex = /Start of turn/g;
             const restaurant_regex = /restaurant/g;
@@ -52,17 +63,8 @@
             let last_message = {
                 body: []
             };
-            let turns = [];
-            let restaurant = [];
-            let uses = [];
-            let plays = [];
-            let works = [];
-            let markets = [];
-            let trains = [];
-            let hires = [];
-            let fires = [];
-            let other = [];
             lines.forEach(function(line, idx) {
+                content.push(line);
                 if (timestamp_regex.test(line)) {
                     messages.push(last_message);
                     last_message = {
@@ -94,30 +96,32 @@
                     }
                 }
             })
-            console.log('CONTENT:', content);
+            // console.log('CONTENT:', content);
             let players = [];
             plays.forEach(function(play_idx) {
-                let new_player = content[play_idx].split(' ')[0];
+                console.log('play_idx='+play_idx);
+                let new_player = content[parseInt(play_idx)].split(' ')[0];
+                console.log('content['+play_idx+']='+content[parseInt(play_idx)]);
                 if (!players.includes(new_player)) {
                     players.push(new_player);
                 }
             })
             // console.log('ALL MESSAGES:', messages);
             console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length);
-            console.log('content.length:',content.length);
-            console.log('turns_idx:',turns);
-            console.log('turns_idx[0]:',turns[0]);
-            let content_idx = turns[0];
-            console.log('typeof content:',typeof content);
-            console.log('content[133]:',content[133]);
+            // console.log('content.length:',content.length);
+            // console.log('turns_idx:',turns);
+            // console.log('turns_idx[0]:',turns[0]);
+            // let content_idx = turns[0];
+            // console.log('typeof content:',typeof content);
+            // console.log('content[133]:',content[133]);
             // console.log('content[turn_idx[0]]:',content[content_idx]);
             // console.log('restaurant:',restaurant);
             // console.log('uses:',uses);
             // console.log('plays:',plays);
             // console.log('works:',works);
             // console.log('markets:',markets);
-            console.log('trains:',trains);
-            console.log('hires:',hires);
+            // console.log('trains:',trains);
+            // console.log('hires:',hires);
             // console.log('fires:',fires);
             // console.log('other:',other);
             console.log('players:',players);
