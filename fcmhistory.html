@@ -171,12 +171,13 @@
             new_row = document.createElement('div');
             new_row.classList.add('row');
             new_cell = document.createElement('div');
-            new_row.classList.add('cell');
+            new_cell.classList.add('cell');
             new_textnode = document.createTextNode('ROUND');
             new_cell.appendChild(new_textnode);
             new_row.appendChild(new_cell);
             for (let player of players) {
                 let new_cell = document.createElement('div');
+                new_cell.classList.add('cell');
                 new_cell.innerHTML = player;
                 new_row.appendChild(new_cell);
             }
@@ -187,7 +188,7 @@
                 new_row = document.createElement('div');
                 new_row.classList.add('row');
                 new_cell = document.createElement('div');
-                new_row.classList.add('cell');
+                new_cell.classList.add('cell');
                 new_textnode = document.createTextNode(t+1);
                 new_cell.appendChild(new_textnode);
                 new_row.appendChild(new_cell);
@@ -195,6 +196,7 @@
                 let end = zb_turn_limits[t].end;
                 for (let player of players) {
                     let new_cell = document.createElement('div');
+                    new_cell.classList.add('cell');
                     new_cell.innerHTML = player;
                     new_row.appendChild(new_cell);
                 }
