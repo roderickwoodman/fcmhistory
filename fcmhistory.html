@@ -192,13 +192,18 @@
                 new_textnode = document.createTextNode(t+1);
                 new_cell.appendChild(new_textnode);
                 new_row.appendChild(new_cell);
+
                 let start = zb_turn_limits[t].start;
                 let end = zb_turn_limits[t].end;
                 for (let player of players) {
-                    let new_cell = document.createElement('div');
-                    new_cell.classList.add('cell');
-                    new_cell.innerHTML = player;
-                    new_row.appendChild(new_cell);
+                    let player_work = works.filter( idx => idx>=start && idx<=end && content[idx].includes(player) );
+                    for (const work of player_work) {
+                        console.log('['+work+'] work='+content[work]);
+                        let new_cell = document.createElement('div');
+                        new_cell.classList.add('cell');
+                        new_cell.innerHTML = content[work];
+                        new_row.appendChild(new_cell);
+                    }
                 }
                 report.appendChild(new_row);
             }
