@@ -110,7 +110,6 @@
             })
 
             let prev_min = 0;
-            // turns.forEach(function(turn_idx) {
             for (let t=0; t<turns.length-1; t++) {
                 let turn_idx = parseInt(turns[t]);
                 let new_turn_msg = content[turn_idx].split(' ')
@@ -124,7 +123,6 @@
                 }
                 zb_turn_limits[zb_turn_limits.length - 1].end = content.length - 1;
             }
-            console.log(zb_turn_limits)
 
 
             // console.log('ALL MESSAGES:', messages);
@@ -155,16 +153,41 @@
         }
 
         function displayData() {
-            let num_players = players.length;
 
+            let num_players = players.length;
             let report = document.getElementById('report');
-            let new_row = document.createElement('div');
+            let new_row, new_cell, new_textnode;
+
+            // ROW: players
+            new_row = document.createElement('div');
+            new_cell = document.createElement('div');
+            new_textnode = document.createTextNode('ROUND');
+            new_cell.appendChild(new_textnode);
+            new_row.appendChild(new_cell);
             for (let player of players) {
                 let new_cell = document.createElement('div');
                 new_cell.innerHTML = player;
                 new_row.appendChild(new_cell);
             }
             report.appendChild(new_row);
+
+            // ROWS: all turns
+            for (let t=0; t<zb_turn_limits.length; t++) {
+                new_row = document.createElement('div');
+                new_cell = document.createElement('div');
+                new_textnode = document.createTextNode(t+1);
+                new_cell.appendChild(new_textnode);
+                new_row.appendChild(new_cell);
+                let start = zb_turn_limits[t].start;
+                let end = zb_turn_limits[t].end;
+                for (let player of players) {
+                    let new_cell = document.createElement('div');
+                    new_cell.innerHTML = player;
+                    new_row.appendChild(new_cell);
+                }
+                report.appendChild(new_row);
+            }
+
         }
 
     </script>
