@@ -105,6 +105,10 @@
                     } else if (plays_regex.test(line)) {
                         plays.push(idx);
                     } else if (works_regex.test(line)) {
+                        let parts = line.split(' : ');
+                        let player = parts[0].split(' ')[0];
+                        let employees_working = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
+                        console.log(player,':',employees_working)
                         works.push(idx);
                     } else if (markets_regex.test(line)) {
                         markets.push(idx);
