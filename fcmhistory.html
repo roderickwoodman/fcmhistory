@@ -92,6 +92,9 @@
             };
             for (let l=0; l<lines.length; l++) {
                 content.push(lines[l]);
+                if (plays_regex.test(lines[l])) {
+                    plays.push(l);
+                }
             };
             for (let idx=0; idx<content.length; idx++) {
                 let line = content[idx];
@@ -108,12 +111,14 @@
             }
             console.log('KEY_EVENTS:',key_events);
             // console.log('CONTENT:', content);
+
             plays.forEach(function(play_idx) {
                 let new_player = content[parseInt(play_idx)].split(' ')[0];
                 if (!players.includes(new_player)) {
                     players.push(new_player);
                 }
             })
+            console.log('PLAYERS:', players);
 
             let prev_min = 0;
             for (let t=0; t<turns.length-1; t++) {
@@ -144,7 +149,7 @@
             // console.log('hires:',hires);
             // console.log('fires:',fires);
             // console.log('other:',other);
-            console.log('players=',players);
+            // console.log('players=',players);
             console.log('turns='+turns.length
                 +' restaurant='+restaurant.length
                 +' uses='+uses.length
@@ -179,8 +184,8 @@
                 restaurant.push(idx);
             } else if (uses_regex.test(line)) {
                 uses.push(idx);
-            } else if (plays_regex.test(line)) {
-                plays.push(idx);
+            } else plays_regex.test(line)) {
+            //    plays.push(idx);
             } else if (works_regex.test(line)) {
                 let parts = line.split(' : ');
                 let employees_working = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
