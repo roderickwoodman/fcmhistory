@@ -186,7 +186,6 @@
                     } else if (plays_regex.test(line)) {
                     //    plays.push(idx);
                     } else if (works_regex.test(line)) {
-                        console.log('['+current_turn+'|'+player+']:', key_events[current_turn][player]);
                         if (!key_events[current_turn][player].hasOwnProperty('works')) {
                             key_events[current_turn][player]['works'] = [];
                         }
@@ -204,7 +203,6 @@
                         fires.push(idx);
                     }
                 } else {
-                    // console.log('player '+player+' is NOT a real player!');
                     other.push(idx);
                 }
             }
@@ -214,13 +212,15 @@
 
             let num_players = players.length;
             let report = document.getElementById('report');
-            let new_row, new_cell, new_textnode;
+            let new_row, new_cell, new_textnode, new_listitem, new_listitemtext;
 
             // ROW: players
             new_row = document.createElement('div');
             new_row.classList.add('row');
             new_cell = document.createElement('div');
             new_cell.classList.add('cell');
+
+            // FIRST ROW: the round number and the player columns
             new_textnode = document.createTextNode('ROUND');
             new_cell.appendChild(new_textnode);
             new_row.appendChild(new_cell);
@@ -234,26 +234,47 @@
 
             // ROWS: all turns
             for (let t=0; t<zb_turn_limits.length; t++) {
-                new_row = document.createElement('div');
+
+                // COLUMN: the round number
+                let new_row = document.createElement('div');
                 new_row.classList.add('row');
-                new_cell = document.createElement('div');
+                let new_cell = document.createElement('div');
                 new_cell.classList.add('cell');
-                new_textnode = document.createTextNode(t+1);
+                let new_textnode = document.createTextNode(t+1);
                 new_cell.appendChild(new_textnode);
                 new_row.appendChild(new_cell);
 
-                let start = zb_turn_limits[t].start;
-                let end = zb_turn_limits[t].end;
-                for (let player of players) {
-                    let player_work = works.filter( idx => idx>=start && idx<=end && content[idx].includes(player) );
-                    for (const work of player_work) {
-                        // console.log('['+work+'] work='+content[work]);
-                        let new_cell = document.createElement('div');
-                        new_cell.classList.add('cell');
-                        new_cell.innerHTML = content[work];
-                        new_row.appendChild(new_cell);
+                // COLUMNS: the player data
+
+
+
+                for (let p=0; p<players.length; p++) {
+                    let player_name = players[p];
+
+                    let new_cell = document.createElement('ul');
+                    console.log('key_events[t][player_name]:',key_events[t][player_name]);
+                    for (let [idx,employee] in key_events[t][player_name]['works']) {
+                        let new_listitem = document.createElement('li');
+                        new_listitem.innerHTML = employee;
+                        new_cell.appendChild(new_listitem);
                     }
+
+                    new_row.appendChild(new_cell);
+
                 }
+
+                // let start = zb_turn_limits[t].start;
+                // let end = zb_turn_limits[t].end;
+                // for (let player of players) {
+                //     let player_work = works.filter( idx => idx>=start && idx<=end && content[idx].includes(player) );
+                //     for (const work of player_work) {
+                //         // console.log('['+work+'] work='+content[work]);
+                //         let new_cell = document.createElement('div');
+                //         new_cell.classList.add('cell');
+                //         new_cell.innerHTML = content[work];
+                //         new_row.appendChild(new_cell);
+                //     }
+                // }
                 report.appendChild(new_row);
             }
 
