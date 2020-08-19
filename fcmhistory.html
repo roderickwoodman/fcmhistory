@@ -176,7 +176,8 @@
                 let player = line.split(' ')[0];
                 if (players.includes(player)) {
                     if (!key_events[current_turn].hasOwnProperty(player)) {
-                        key_events[current_turn][player] = {};
+                        let new_player_events = {};
+                        key_events[current_turn][player] = new_player_events;
                     }
                     if (restaurant_regex.test(line)) {
                         restaurant.push(idx);
@@ -185,6 +186,10 @@
                     } else if (plays_regex.test(line)) {
                     //    plays.push(idx);
                     } else if (works_regex.test(line)) {
+                        console.log('['+current_turn+'|'+player+']:', key_events[current_turn][player]);
+                        if (!key_events[current_turn][player].hasOwnProperty('works')) {
+                            key_events[current_turn][player]['works'] = [];
+                        }
                         let parts = line.split(' : ');
                         let employees_working = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
                         works.push(idx);
