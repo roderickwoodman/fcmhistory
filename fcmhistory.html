@@ -31,11 +31,13 @@
 
 <body onload="init()">
 
+    <!--
     <h1>Hello World!</h1>
     <form onsubmit="onUpload()">
         <input id="file-input" type="file" />
         <button type="submit">Upload</button>
     </form>
+    -->
 
     <div id="report">
 
@@ -68,24 +70,24 @@
             'Marketing Trainee', 'Campaign Manager', 'Brand Manager', 'Brand Director',
             'Kitchen Trainee', 'Burger Cook', 'Burger Chef', 'Pizza Cook', 'Pizza Chef'];
 
-        function init() {
-            let input = document.getElementById('file-input');
-            input.onchange = e => {
-                file = e.target.files[0];
-            }
-        }
+        // function init() {
+        //     let input = document.getElementById('file-input');
+        //     input.onchange = e => {
+        //         file = e.target.files[0];
+        //     }
+        // }
 
-        function onUpload() {
-            event.preventDefault()
+        // function onUpload() {
+        //     event.preventDefault()
 
-            let reader = new FileReader();
-            reader.readAsText(file, 'UTF-8');
-            reader.onload = readerEvent => {
-                let file_content = readerEvent.target.result;
-                parseContent(file_content);
-                displayData();
-            }
-        }
+        //     let reader = new FileReader();
+        //     reader.readAsText(file, 'UTF-8');
+        //     reader.onload = readerEvent => {
+        //         let file_content = readerEvent.target.result;
+        //         parseContent(file_content);
+        //         displayData();
+        //     }
+        // }
 
         const turns_regex = /Start of turn/g;
         const restaurant_regex = /restaurant/g;
@@ -97,9 +99,14 @@
         const hires_regex = /hires :/g;
         const fires_regex = /fires/g;
 
-        function parseContent(file_content) {
-            let fc = JSON.parse(JSON.stringify(file_content));
-            var lines = fc.split(/[\r\n]+/g);
+        // function parseContent(file_content) {
+        function init() {
+            // let fc = JSON.parse(JSON.stringify(file_content));
+            // var lines = fc.split(/[\r\n]+/g);
+            // var lines = file_content.split(/[\r\n]+/g);
+            var lines = file_content.split(/[\r\n]+/g);
+            console.log('numlines='+lines.length);
+            // console.log('lines='+lines);
             const timestamp_regex = /^[0-9]{4}[\/][0-9]{2}[\/][0-9]{2}/g;
             let messages = [];
             let last_message = {
@@ -149,6 +156,7 @@
                 }
                 zb_turn_limits[zb_turn_limits.length - 1].end = content.length - 1;
             }
+            // console.log('zb_turn_limits:',zb_turn_limits);
 
 
             // console.log('ALL MESSAGES:', messages);
@@ -176,6 +184,8 @@
                 +' fires='+fires.length
                 +' other='+other.length
                 +' players='+players.length)
+
+            displayData();
         }
 
         function parseEvent(idx, line) {
@@ -270,6 +280,7 @@
 
                     let new_cell = document.createElement('ul');
                     new_cell.classList.add('cell');
+                    console.log('t='+t+' player_name='+player_name);
                     console.log('key_events[t][player_name]:',key_events[t][player_name]);
                     for (let [idx,employee] in key_events[t][player_name]['works']) {
                         let new_listitem = document.createElement('li');
@@ -297,6 +308,276 @@
             }
 
         }
+
+        const file_content = 
+        `
+        Start of turn 9
+2020/08/13 16:37:21
+Marketing Campaigns
+#1 put  on house(s) [4,2,15,18,8]
+#3 put  on house(s) [8,7,18,2,16,12]
+#6 put  on house(s) [13,4,15,10,5]
+#7 put  on house(s) [7,12]
+#9 put , but no house has space left
+#11 put , but no house has space left
+#12 put , but no house has space left
+#14 put  on house(s) [13,10]
+#15 put , but no house has space left
+#16 put  on house(s) [5]
+2020/08/13 16:37:21
+Salaries
+ : $30
+ : $10
+ : $10
+ : $5
+ : $10
+2020/08/13 16:37:21
+Kulade fires : Pizza Cook
+2020/08/13 16:36:57
+ajlaursen fires no employee.
+2020/08/13 16:32:09
+RodimusPrime fires no employee.
+2020/08/13 16:31:51
+Anwei fires no employee.
+2020/08/13 16:31:15
+xcaptnmorgan fires no employee.
+2020/08/13 16:31:00
+Income
+Player	Houses	Waitress	CFO bonus	Total
+	$60	$0	$0	$60
+	$60	$0	$30	$90
+	$0	$0	$0	$0
+	$40	$0	$0	$40
+	$30	$0	$0	$30
+2020/08/13 16:31:00
+Dinner time
+House #2 :  
+Players who can fulfill these needs :
+ : $10, distance 5, 0 Waitress, first player
+ : $10, distance 0, 0 Waitress, second player
+House #2 goes to  to get a dinner for $25. Base price : $10 x 2 good(s).The player has a bonus of $5.
+House #4 : 
+Players who can fulfill these needs :
+ : $10, distance 1, 0 Waitress, first player
+ : $10, distance 6, 0 Waitress, second player
+ : $10, distance 4, 0 Waitress, third player
+House #4 goes to  to get a dinner for $10. Base price : $10 x 1 good(s).
+House #5 :  
+Players who can fulfill these needs :
+ : $10, distance 2, 0 Waitress, first player
+ : $10, distance 1, 0 Waitress, third player
+House #5 goes to  to get a dinner for $30. Base price : $10 x 2 good(s).The player has a bonus of $10.
+House #7 :  : Only  can fulfill these needs.
+House #7 goes to  to get a dinner for $10. Base price : $10 x 1 good(s).
+House #8 : 
+Players who can fulfill these needs :
+ : $10, distance 4, 0 Waitress, first player
+ : $10, distance 1, 0 Waitress, second player
+House #8 goes to  to get a dinner for $15. Base price : $10 x 1 good(s).The player has a bonus of $5.
+House #10 :  
+Players who can fulfill these needs :
+ : $10, distance 3, 0 Waitress, first player
+ : $10, distance 0, 0 Waitress, third player
+House #10 goes to  to get a dinner for $30. Base price : $10 x 2 good(s).The player has a bonus of $10.
+House #12 :  : Only  can fulfill these needs.
+House #12 goes to  to get a dinner for $10. Base price : $10 x 1 good(s).
+House #13 :   : Only  can fulfill these needs.
+House #13 goes to  to get a dinner for $20. Base price : $10 x 2 good(s).
+House #15 :    : Only  can fulfill these needs.
+House #15 goes to  to get a dinner for $30. Base price : $10 x 3 good(s).
+House #18 :  : Only  can fulfill these needs.
+House #18 goes to  to get a dinner for $10. Base price : $10 x 1 good(s).
+2020/08/13 16:30:57
+xcaptnmorgan uses his/her team : Burger Chef to produce/collect : 8 
+2020/08/13 16:30:44
+xcaptnmorgan started the marketing campaign #3 with Brand Director, advertising  for 5 turns
+2020/08/13 16:28:45
+xcaptnmorgan received a new milestone : 
+2020/08/13 16:27:43
+xcaptnmorgan trains : Senior Vice President from Management Trainee
+2020/08/13 16:27:11
+xcaptnmorgan hires : Management Trainee
+2020/08/13 16:21:58
+Anwei uses his/her team : to produce/collect :
+2020/08/13 16:21:24
+Anwei started the marketing campaign #1 with Brand Director, advertising  eternally
+2020/08/13 16:20:32
+Anwei received a new milestone : 
+2020/08/13 16:20:30
+Anwei trains : Executive Vice President from Vice President, Regional Manager from Junior Vice President, Zeppelin Pilot from Cart Operator
+2020/08/13 16:20:17
+Anwei hires : Pricing Manager
+2020/08/13 16:09:55
+ajlaursen uses his/her team : Errand BoyErrand Boy to produce/collect : 2 , 2 
+2020/08/13 16:09:43
+ajlaursen trains : Senior Vice President from Management Trainee
+2020/08/13 16:08:11
+ajlaursen hires : Errand BoyManagement Trainee
+2020/08/13 16:01:35
+Kulade uses his/her team : Pizza ChefErrand BoyErrand Boy to produce/collect : 8 , 2 
+2020/08/13 16:01:14
+Kulade trains : Burger Cook from Kitchen Trainee
+2020/08/13 16:01:04
+Kulade hires : Pricing ManagerKitchen Trainee
+2020/08/13 15:53:19
+RodimusPrime uses his/her team : Cart OperatorKitchen Trainee to produce/collect : 1 , 4 , 2 
+2020/08/13 15:52:29
+RodimusPrime started the marketing campaign #7 with Campaign Manager, advertising  for 3 turns
+2020/08/13 15:51:20
+RodimusPrime trains : Junior Vice President from Management Trainee
+2020/08/13 15:50:57
+RodimusPrime hires : Management TraineeTrainer
+2020/08/13 15:24:55
+xcaptnmorgan has to play fifth
+2020/08/13 15:24:55
+Anwei chooses to play fourth
+2020/08/13 15:08:38
+ajlaursen chooses to play third
+2020/08/13 13:32:53
+Kulade chooses to play second
+2020/08/13 13:31:00
+RodimusPrime chooses to play first
+2020/08/13 13:30:56
+RodimusPrime sends to work : Junior Vice PresidentTrainerCampaign ManagerCart OperatorRecruiting GirlKitchen Trainee
+2020/08/13 11:35:10
+Anwei sends to work : Management TraineeManagement TraineeGuruTrainerTrainerTrainerBrand Director
+2020/08/13 10:01:40
+Kulade sends to work : Management TraineeJunior Vice PresidentRecruiting GirlTrainerPizza ChefErrand BoyErrand Boy
+2020/08/13 10:00:39
+xcaptnmorgan sends to work : Brand DirectorBurger ChefGuru
+2020/08/13 09:51:48
+ajlaursen sends to work : Management TraineeGuruErrand BoyErrand BoyRecruiting Girl
+Start of turn 8
+2020/08/13 09:51:15
+Marketing Campaigns
+#6 put  on house(s) [13,4,15,10,2,5]
+#9 put  on house(s) [8]
+#11 put  on house(s) [12,7]
+#12 put  on house(s) [2]
+#14 put  on house(s) [13,10]
+#15 put  on house(s) [18]
+#16 put  on house(s) [5]
+2020/08/13 09:51:14
+ajlaursen fires no employee.
+2020/08/13 09:51:13
+Salaries
+ : $30
+ : $5
+ : $10
+ : $0
+ : $5
+2020/08/13 07:36:02
+RodimusPrime fires no employee.
+2020/08/13 07:15:56
+Kulade fires no employee.
+2020/08/13 07:15:29
+xcaptnmorgan fires : Truck DriverJunior Vice President
+2020/08/13 07:14:20
+Anwei fires no employee.
+2020/08/13 07:12:10
+The bank broke. Refill : $800
+2020/08/13 07:12:10
+The reserve cards :
+
+
+2020/08/13 07:12:10
+Income
+Player	Houses	Waitress	CFO bonus	Total
+	$40	$0	$0	$40
+	$60	$0	$0	$60
+	$93	$0	$0	$93
+	$15	$0	$0	$15
+	$0	$5	$0	$5
+2020/08/13 07:12:10
+ajlaursen received a new milestone : 
+2020/08/13 07:12:10
+Anwei received a new milestone : 
+2020/08/13 07:12:10
+Dinner time
+House #2 : 
+Players who can fulfill these needs :
+ : $9, distance 1, 0 Waitress, fourth player
+ : $10, distance 5, 0 Waitress, first player
+ : $10, distance 6, 0 Waitress, third player
+House #2 goes to  to get a dinner for $9. Base price : $9 x 1 good(s).
+House #4 :  
+Players who can fulfill these needs :
+ : $10, distance 1, 0 Waitress, first player
+ : $10, distance 4, 0 Waitress, third player
+House #4 goes to  to get a dinner for $20. Base price : $10 x 2 good(s).
+House #5 :  
+Players who can fulfill these needs :
+ : $10, distance 2, 0 Waitress, first player
+ : $10, distance 1, 0 Waitress, third player
+House #5 goes to  to get a dinner for $30. Base price : $10 x 2 good(s).The player has a bonus of $10.
+House #7 :  : Only  can fulfill these needs.
+House #7 goes to  to get a dinner for $14. Base price : $9 x 1 good(s).The player has a bonus of $5.
+House #8 :  : Only  can fulfill these needs.
+House #8 goes to  to get a dinner for $15. Base price : $10 x 1 good(s).The player has a bonus of $5.
+House #10 :  
+Players who can fulfill these needs :
+ : $10, distance 3, 0 Waitress, first player
+ : $10, distance 0, 0 Waitress, third player
+House #10 goes to  to get a dinner for $30. Base price : $10 x 2 good(s).The player has a bonus of $10.
+House #12 :   : Only  can fulfill these needs.
+House #12 goes to  to get a dinner for $28. Base price : $9 x 2 good(s).The player has a bonus of $10.
+House #13 :   : Only  can fulfill these needs.
+House #13 goes to  to get a dinner for $20. Base price : $10 x 2 good(s).
+House #15 :   : No one can fulfill these needs.
+House #18 :    : Only  can fulfill these needs.
+House #18 goes to  to get a dinner for $42. Base price : $9 x 3 good(s).The player has a bonus of $15.
+2020/08/13 07:12:07
+xcaptnmorgan uses his/her team : to produce/collect :
+2020/08/13 07:12:07
+xcaptnmorgan trains : Truck Driver from Cart Operator, Burger Chef from Burger Cook, Junior Vice President from Management Trainee
+2020/08/13 07:11:03
+xcaptnmorgan hires : Management TraineePricing Manager
+2020/08/13 06:53:54
+Anwei uses his/her team : Burger ChefErrand Boy to produce/collect : 8 , 1 
+2020/08/13 06:53:48
+Anwei trains : Brand Director from Marketing Trainee, Cart Operator from Errand Boy, Vice President from Management Trainee
+2020/08/13 06:53:02
+Anwei hires : Kitchen TraineeMarketing Trainee
+2020/08/12 22:14:30
+ajlaursen uses his/her team : Errand Boy to produce/collect : 2 
+2020/08/12 22:14:24
+ajlaursen hires : Management TraineeErrand Boy
+2020/08/12 22:04:55
+Kulade uses his/her team : Pizza Cook to produce/collect : 3 
+2020/08/12 22:04:48
+Kulade started the marketing campaign #12 with Campaign Manager, advertising  for 3 turns
+2020/08/12 22:04:24
+Kulade trains : Pizza Chef from Pizza Cook
+2020/08/12 22:03:58
+Kulade hires : Errand BoyErrand Boy
+2020/08/12 18:16:48
+RodimusPrime uses his/her team : Cart Operator to produce/collect : 4 , 2 
+2020/08/12 18:16:11
+RodimusPrime trains : Junior Vice President from Management Trainee
+2020/08/12 18:15:46
+RodimusPrime hires : Management TraineeKitchen Trainee
+2020/08/12 17:49:54
+xcaptnmorgan has to play fifth
+2020/08/12 17:49:54
+Anwei chooses to play fourth
+2020/08/12 17:48:52
+ajlaursen chooses to play third
+2020/08/12 07:09:07
+Kulade chooses to play second
+2020/08/12 01:30:13
+RodimusPrime chooses to play first
+2020/08/12 01:05:16
+xcaptnmorgan sends to work : Recruiting GirlGuruWaitress
+2020/08/11 20:43:55
+Anwei sends to work : Management TraineeManagement TraineeJunior Vice PresidentBurger ChefGuruTrainerTrainerTrainerErrand BoyRecruiting Girl
+2020/08/11 20:32:19
+RodimusPrime sends to work : Cart OperatorRecruiting GirlTrainer
+2020/08/11 20:30:35
+Kulade sends to work : Management TraineeJunior Vice PresidentTrainerRecruiting GirlCampaign ManagerPizza Cook
+2020/08/11 20:28:44
+ajlaursen sends to work : Recruiting GirlGuruErrand Boy
+
+        `
 
     </script>
 </body>
