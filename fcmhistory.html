@@ -185,56 +185,6 @@
                 +' other='+other.length
                 +' players='+players.length)
 
-            displayData();
-        }
-
-        function parseEvent(idx, line) {
-
-            if (!key_events.hasOwnProperty(current_turn)) {
-                key_events[current_turn] = {};
-            }
-            if (turns_regex.test(line)) {
-                let words = line.split('');
-                current_turn = words[words.length-1];
-                turns.push(idx);
-            } else {
-                let player = line.split(' ')[0];
-                if (players.includes(player)) {
-                    if (!key_events[current_turn].hasOwnProperty(player)) {
-                        let new_player_events = {};
-                        key_events[current_turn][player] = new_player_events;
-                    }
-                    if (restaurant_regex.test(line)) {
-                        restaurant.push(idx);
-                    } else if (uses_regex.test(line)) {
-                        uses.push(idx);
-                    } else if (plays_regex.test(line)) {
-                    //    plays.push(idx);
-                    } else if (works_regex.test(line)) {
-                        if (!key_events[current_turn][player].hasOwnProperty('works')) {
-                            key_events[current_turn][player]['works'] = [];
-                        }
-                        let parts = line.split(' : ');
-                        let employees_working = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
-                        works.push(idx);
-                        key_events[current_turn][player]['works'] = employees_working;
-                    } else if (markets_regex.test(line)) {
-                        markets.push(idx);
-                    } else if (trains_regex.test(line)) {
-                        trains.push(idx);
-                    } else if (hires_regex.test(line)) {
-                        hires.push(idx);
-                    } else if (fires_regex.test(line)) {
-                        fires.push(idx);
-                    }
-                } else {
-                    other.push(idx);
-                }
-            }
-        }
-
-        function displayData() {
-
             let num_players = players.length;
             let report = document.getElementById('report');
             let new_row, new_cell, new_textnode, new_listitem, new_listitemtext;
@@ -280,12 +230,24 @@
 
                     let new_cell = document.createElement('ul');
                     new_cell.classList.add('cell');
-                    console.log('t='+t+' player_name='+player_name);
-                    console.log('key_events[t][player_name]:',key_events[t][player_name]);
-                    for (let [idx,employee] in key_events[t][player_name]['works']) {
-                        let new_listitem = document.createElement('li');
-                        new_listitem.innerHTML = employee;
-                        new_cell.appendChild(new_listitem);
+                    // console.log('t='+t+' player_name='+player_name);
+                    // console.log('key_events[t][player_name]:',key_events[t][player_name]);
+                    // console.log('K E Y   E V E N T S :  ', key_events);
+                        console.log('HEY!',key_events[t]);
+                    // let player_data = key_events[t][player_name]
+                    // console.log('player_data:',player_data);
+                    
+                    if (key_events[t].hasOwnProperty(player_name)) {
+                        console.log('YEP');
+                        if (key_events[t][player_name].hasOwnProperty('works')) {
+                            console.log('HERE!');
+                            for (let [idx,employee] in key_events[t][player_name]['works']) {
+                                console.log('employee:', employee);
+                                let new_listitem = document.createElement('li');
+                                new_listitem.innerHTML = employee;
+                                new_cell.appendChild(new_listitem);
+                            }
+                        }
                     }
 
                     new_row.appendChild(new_cell);
@@ -307,6 +269,51 @@
                 report.appendChild(new_row);
             }
 
+        }
+
+        function parseEvent(idx, line) {
+
+            if (!key_events.hasOwnProperty(current_turn)) {
+                key_events[current_turn] = {};
+            }
+            if (turns_regex.test(line)) {
+                let words = line.split('');
+                current_turn = words[words.length-1];
+                turns.push(idx);
+            } else {
+                let player = line.split(' ')[0];
+                if (players.includes(player)) {
+                    if (!key_events[current_turn].hasOwnProperty(player)) {
+                        let new_player_events = {};
+                        key_events[current_turn][player] = new_player_events;
+                    }
+                    if (restaurant_regex.test(line)) {
+                        restaurant.push(idx);
+                    } else if (uses_regex.test(line)) {
+                        uses.push(idx);
+                    } else if (plays_regex.test(line)) {
+                    //    plays.push(idx);
+                    } else if (works_regex.test(line)) {
+                        if (!key_events[current_turn][player].hasOwnProperty('works')) {
+                            key_events[current_turn][player]['works'] = [];
+                        }
+                        let parts = line.split(' : ');
+                        let employees_working = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
+                        works.push(idx);
+                        key_events[current_turn][player]['works'] = employees_working;
+                    } else if (markets_regex.test(line)) {
+                        markets.push(idx);
+                    } else if (trains_regex.test(line)) {
+                        trains.push(idx);
+                    } else if (hires_regex.test(line)) {
+                        hires.push(idx);
+                    } else if (fires_regex.test(line)) {
+                        fires.push(idx);
+                    }
+                } else {
+                    other.push(idx);
+                }
+            }
         }
 
         const file_content = 
