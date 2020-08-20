@@ -258,6 +258,7 @@
                     let player_name = players[p];
 
                     let new_cell = document.createElement('ul');
+                    new_cell.classList.add('cell');
                     console.log('key_events[t][player_name]:',key_events[t][player_name]);
                     for (let [idx,employee] in key_events[t][player_name]['works']) {
                         let new_listitem = document.createElement('li');
