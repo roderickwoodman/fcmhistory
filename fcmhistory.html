@@ -244,11 +244,11 @@
                     if (key_events[t].hasOwnProperty(player_name)) {
 
                         let new_listitem = document.createElement('li');
-                        new_listitem.innerHTML = 'hires:';
+                        new_listitem.innerHTML = 'trains:';
                         new_listitem.classList.add('emphasis');
                         new_cell.appendChild(new_listitem);
-                        if (key_events[t][player_name].hasOwnProperty('hires')) {
-                            let employees = key_events[t][player_name]['hires'];
+                        if (key_events[t][player_name].hasOwnProperty('trains')) {
+                            let employees = key_events[t][player_name]['trains'];
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
@@ -266,6 +266,23 @@
                         new_cell.appendChild(new_listitem);
                         if (key_events[t][player_name].hasOwnProperty('works')) {
                             let employees = key_events[t][player_name]['works'];
+                            for (let e=0; e<employees.length; e++) {
+                                let new_listitem = document.createElement('li');
+                                new_listitem.innerHTML = employees[e];
+                                new_cell.appendChild(new_listitem);
+                            }
+                        } else {
+                            let new_listitem = document.createElement('li');
+                            new_listitem.innerHTML = '--';
+                            new_cell.appendChild(new_listitem);
+                        }
+
+                        new_listitem = document.createElement('li');
+                        new_listitem.innerHTML = 'hires:';
+                        new_listitem.classList.add('emphasis');
+                        new_cell.appendChild(new_listitem);
+                        if (key_events[t][player_name].hasOwnProperty('hires')) {
+                            let employees = key_events[t][player_name]['hires'];
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
@@ -337,7 +354,13 @@
                     } else if (markets_regex.test(line)) {
                         markets.push(idx);
                     } else if (trains_regex.test(line)) {
+                        if (!key_events[current_turn][player].hasOwnProperty('trains')) {
+                            key_events[current_turn][player]['trains'] = [];
+                        }
+                        let parts = line.split(' : ');
+                        let employees_trained = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*\sfrom\s[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
                         trains.push(idx);
+                        key_events[current_turn][player]['trains'] = employees_trained;
                     } else if (hires_regex.test(line)) {
                         if (!key_events[current_turn][player].hasOwnProperty('hires')) {
                             key_events[current_turn][player]['hires'] = [];
