@@ -295,6 +295,23 @@
                         }
 
                         new_listitem = document.createElement('li');
+                        new_listitem.innerHTML = 'markets:';
+                        new_listitem.classList.add('emphasis');
+                        new_cell.appendChild(new_listitem);
+                        if (key_events[t][player_name].hasOwnProperty('markets')) {
+                            let employees = key_events[t][player_name]['markets'];
+                            for (let e=0; e<employees.length; e++) {
+                                let new_listitem = document.createElement('li');
+                                new_listitem.innerHTML = employees[e];
+                                new_cell.appendChild(new_listitem);
+                            }
+                        } else {
+                            let new_listitem = document.createElement('li');
+                            new_listitem.innerHTML = '--';
+                            new_cell.appendChild(new_listitem);
+                        }
+
+                        new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'fires:';
                         new_listitem.classList.add('emphasis');
                         new_cell.appendChild(new_listitem);
@@ -369,7 +386,15 @@
                         works.push(idx);
                         key_events[current_turn][player]['works'] = employees_working;
                     } else if (markets_regex.test(line)) {
+                        let campaigns_started = [];
+                        if (!key_events[current_turn][player].hasOwnProperty('markets')) {
+                            key_events[current_turn][player]['markets'] = [];
+                        } else {
+                            campaigns_started = JSON.parse(JSON.stringify(key_events[current_turn][player]['markets']));
+                        }
+                        campaigns_started.push(line);
                         markets.push(idx);
+                        key_events[current_turn][player]['markets'] = campaigns_started;
                     } else if (trains_regex.test(line)) {
                         if (!key_events[current_turn][player].hasOwnProperty('trains')) {
                             key_events[current_turn][player]['trains'] = [];
