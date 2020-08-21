@@ -209,7 +209,14 @@
             report.appendChild(new_row);
 
             // ROWS: all turns
-            for (let t=0; t<zb_turn_limits.length; t++) {
+            // for (let t=0; t<zb_turn_limits.length; t++) {
+            for (let t=0; t<10; t++) {
+
+                if (!key_events.hasOwnProperty(t)) {
+                    continue;
+                }
+                // console.log('zb_turn_limits:',zb_turn_limits);
+                console.log('['+zb_turn_limits.length+'] TURN#'+(t+1));
 
                 // COLUMN: the round number
                 let new_row = document.createElement('div');
@@ -230,21 +237,13 @@
 
                     let new_cell = document.createElement('ul');
                     new_cell.classList.add('cell');
-                    // console.log('t='+t+' player_name='+player_name);
-                    // console.log('key_events[t][player_name]:',key_events[t][player_name]);
-                    // console.log('K E Y   E V E N T S :  ', key_events);
-                        console.log('HEY!',key_events[t]);
-                    // let player_data = key_events[t][player_name]
-                    // console.log('player_data:',player_data);
                     
                     if (key_events[t].hasOwnProperty(player_name)) {
-                        console.log('YEP');
                         if (key_events[t][player_name].hasOwnProperty('works')) {
-                            console.log('HERE!');
-                            for (let [idx,employee] in key_events[t][player_name]['works']) {
-                                console.log('employee:', employee);
+                            let employees = key_events[t][player_name]['works'];
+                            for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
-                                new_listitem.innerHTML = employee;
+                                new_listitem.innerHTML = employees[e];
                                 new_cell.appendChild(new_listitem);
                             }
                         }
