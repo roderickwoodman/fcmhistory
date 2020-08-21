@@ -253,7 +253,15 @@
                                 new_listitem.innerHTML = employees[e];
                                 new_cell.appendChild(new_listitem);
                             }
+                        } else {
+                            let new_listitem = document.createElement('li');
+                            new_listitem.innerHTML = '--';
+                            new_cell.appendChild(new_listitem);
                         }
+                    } else {
+                        let new_listitem = document.createElement('li');
+                        new_listitem.innerHTML = '--';
+                        new_cell.appendChild(new_listitem);
                     }
 
                     new_row.appendChild(new_cell);
