@@ -25,6 +25,9 @@
         .cell.round_num {
             flex: 0 0 75px;
         }
+        .emphasis {
+            font-weight: 800;
+        }
     </style>
 
 </head>
@@ -237,6 +240,10 @@
 
                     let new_cell = document.createElement('ul');
                     new_cell.classList.add('cell');
+                    let new_listitem = document.createElement('li');
+                    new_listitem.innerHTML = 'sends to work:';
+                    new_listitem.classList.add('emphasis');
+                    new_cell.appendChild(new_listitem);
                     
                     if (key_events[t].hasOwnProperty(player_name)) {
                         if (key_events[t][player_name].hasOwnProperty('works')) {
