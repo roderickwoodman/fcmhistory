@@ -294,6 +294,23 @@
                             new_cell.appendChild(new_listitem);
                         }
 
+                        new_listitem = document.createElement('li');
+                        new_listitem.innerHTML = 'fires:';
+                        new_listitem.classList.add('emphasis');
+                        new_cell.appendChild(new_listitem);
+                        if (key_events[t][player_name].hasOwnProperty('fires')) {
+                            let employees = key_events[t][player_name]['fires'];
+                            for (let e=0; e<employees.length; e++) {
+                                let new_listitem = document.createElement('li');
+                                new_listitem.innerHTML = employees[e];
+                                new_cell.appendChild(new_listitem);
+                            }
+                        } else {
+                            let new_listitem = document.createElement('li');
+                            new_listitem.innerHTML = '--';
+                            new_cell.appendChild(new_listitem);
+                        }
+
                     } else {
                         let new_listitem = document.createElement('li');
                         new_listitem.innerHTML = '--';
@@ -370,7 +387,15 @@
                         hires.push(idx);
                         key_events[current_turn][player]['hires'] = employees_hired;
                     } else if (fires_regex.test(line)) {
-                        fires.push(idx);
+                        if (line.includes(':')) {
+                            if (!key_events[current_turn][player].hasOwnProperty('fires')) {
+                                key_events[current_turn][player]['fires'] = [];
+                            }
+                            let parts = line.split(' : ');
+                            let employees_fired = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
+                            fires.push(idx);
+                            key_events[current_turn][player]['fires'] = employees_fired;
+                        }
                     }
                 } else {
                     other.push(idx);
