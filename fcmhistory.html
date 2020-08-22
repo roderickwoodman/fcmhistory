@@ -17,12 +17,14 @@
             display: flex;
             flex-direction: row;
         }
-        .cell {
+        .header_cell,
+        .player_cell {
             padding: 5px;
             flex: 1 1 150px;
             border: 1px solid silver;
         }
-        .cell.round_num {
+        .header_cell.round_num,
+        .player_cell.round_num {
             flex: 0 0 75px;
         }
         .emphasis {
@@ -198,14 +200,14 @@
 
             // FIRST ROW: the round number and the player columns
             new_cell = document.createElement('div');
-            new_cell.classList.add('cell');
+            new_cell.classList.add('header_cell');
             new_cell.classList.add('round_num');
             new_textnode = document.createTextNode('ROUND');
             new_cell.appendChild(new_textnode);
             new_row.appendChild(new_cell);
             for (let player of players) {
                 let new_cell = document.createElement('div');
-                new_cell.classList.add('cell');
+                new_cell.classList.add('header_cell');
                 new_cell.innerHTML = player;
                 new_row.appendChild(new_cell);
             }
@@ -225,7 +227,7 @@
                 let new_row = document.createElement('div');
                 new_row.classList.add('row');
                 let new_cell = document.createElement('div');
-                new_cell.classList.add('cell');
+                new_cell.classList.add('player_cell');
                 new_cell.classList.add('round_num');
                 let new_textnode = document.createTextNode(t+1);
                 new_cell.appendChild(new_textnode);
@@ -239,7 +241,7 @@
                     let player_name = players[p];
 
                     let new_cell = document.createElement('ul');
-                    new_cell.classList.add('cell');
+                    new_cell.classList.add('player_cell');
                     
                     if (key_events[t].hasOwnProperty(player_name)) {
 
