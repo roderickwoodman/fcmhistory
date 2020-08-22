@@ -240,100 +240,112 @@
                 for (let p=0; p<players.length; p++) {
                     let player_name = players[p];
 
-                    let new_cell = document.createElement('ul');
+                    let new_cell = document.createElement('div');
                     new_cell.classList.add('player_cell');
                     
                     if (key_events[t].hasOwnProperty(player_name)) {
 
+                        let new_list = document.createElement('ul');
                         let new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'trains:';
                         new_listitem.classList.add('emphasis');
-                        new_cell.appendChild(new_listitem);
+                        new_list.appendChild(new_listitem);
                         if (key_events[t][player_name].hasOwnProperty('trains')) {
                             let employees = key_events[t][player_name]['trains'];
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
-                                new_cell.appendChild(new_listitem);
+                                new_list.appendChild(new_listitem);
                             }
                         } else {
                             let new_listitem = document.createElement('li');
                             new_listitem.innerHTML = '--';
-                            new_cell.appendChild(new_listitem);
+                            new_list.appendChild(new_listitem);
                         }
+                        new_cell.appendChild(new_list);
 
+                        new_list = document.createElement('ul');
                         new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'sends to work:';
                         new_listitem.classList.add('emphasis');
-                        new_cell.appendChild(new_listitem);
+                        new_list.appendChild(new_listitem);
                         if (key_events[t][player_name].hasOwnProperty('works')) {
                             let employees = key_events[t][player_name]['works'];
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
-                                new_cell.appendChild(new_listitem);
+                                new_list.appendChild(new_listitem);
                             }
                         } else {
                             let new_listitem = document.createElement('li');
                             new_listitem.innerHTML = '--';
-                            new_cell.appendChild(new_listitem);
+                            new_list.appendChild(new_listitem);
                         }
+                        new_cell.appendChild(new_list);
 
+                        new_list = document.createElement('ul');
                         new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'hires:';
                         new_listitem.classList.add('emphasis');
-                        new_cell.appendChild(new_listitem);
+                        new_list.appendChild(new_listitem);
                         if (key_events[t][player_name].hasOwnProperty('hires')) {
                             let employees = key_events[t][player_name]['hires'];
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
-                                new_cell.appendChild(new_listitem);
+                                new_list.appendChild(new_listitem);
                             }
                         } else {
                             let new_listitem = document.createElement('li');
                             new_listitem.innerHTML = '--';
-                            new_cell.appendChild(new_listitem);
+                            new_list.appendChild(new_listitem);
                         }
+                        new_cell.appendChild(new_list);
 
+                        new_list = document.createElement('ul');
                         new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'markets:';
                         new_listitem.classList.add('emphasis');
-                        new_cell.appendChild(new_listitem);
+                        new_list.appendChild(new_listitem);
                         if (key_events[t][player_name].hasOwnProperty('markets')) {
                             let employees = key_events[t][player_name]['markets'];
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
-                                new_cell.appendChild(new_listitem);
+                                new_list.appendChild(new_listitem);
                             }
                         } else {
                             let new_listitem = document.createElement('li');
                             new_listitem.innerHTML = '--';
-                            new_cell.appendChild(new_listitem);
+                            new_list.appendChild(new_listitem);
                         }
+                        new_cell.appendChild(new_list);
 
+                        new_list = document.createElement('ul');
                         new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'fires:';
                         new_listitem.classList.add('emphasis');
-                        new_cell.appendChild(new_listitem);
+                        new_list.appendChild(new_listitem);
                         if (key_events[t][player_name].hasOwnProperty('fires')) {
                             let employees = key_events[t][player_name]['fires'];
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
-                                new_cell.appendChild(new_listitem);
+                                new_list.appendChild(new_listitem);
                             }
                         } else {
                             let new_listitem = document.createElement('li');
                             new_listitem.innerHTML = '--';
-                            new_cell.appendChild(new_listitem);
+                            new_list.appendChild(new_listitem);
                         }
+                        new_cell.appendChild(new_list);
 
                     } else {
+                        let new_list = document.createElement('ul');
                         let new_listitem = document.createElement('li');
                         new_listitem.innerHTML = '--';
-                        new_cell.appendChild(new_listitem);
+                        new_list.appendChild(new_listitem);
+                        new_cell.appendChild(new_list);
                     }
 
                     new_row.appendChild(new_cell);
