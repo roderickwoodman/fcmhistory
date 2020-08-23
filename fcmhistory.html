@@ -34,8 +34,20 @@
             display: flex;
             flex-direction: column;
         }
-        div.player_cell > ul {
+        div.player_cell > ul:nth-child(1) { /* trains */
             height: 10rem;
+        }
+        div.player_cell > ul:nth-child(2) { /* works */
+            height: 12rem;
+        }
+        div.player_cell > ul:nth-child(3) { /* hires */
+            height: 5rem;
+        }
+        div.player_cell > ul:nth-child(4) { /* markets */
+            height: 7rem;
+        }
+        div.player_cell > ul:nth-child(5) { /* fires */
+            height: 5rem;
         }
     </style>
 
