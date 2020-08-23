@@ -49,6 +49,38 @@
         div.player_cell > ul:nth-child(5) { /* fires */
             height: 5rem;
         }
+        .red {
+            color: white;
+            background-color: rgb(172,58,62);
+        }
+        .purple {
+            color: black;
+            background-color: rgb(170,139,178);
+        }
+        .black {
+            color: white;
+            background-color: rgb(26,25,25);
+        }
+        .pink {
+            color: black;
+            background-color: rgb(236,158,137);
+        }
+        .gray {
+            color: black;
+            background-color: rgb(184,176,170);
+        }
+        .green {
+            color: black;
+            background-color: rgb(157,197,136);
+        }
+        .blue {
+            color: black;
+            background-color: rgb(157,197,136);
+        }
+        .darkgreen {
+            color: black;
+            background-color: rgb(133,160,95);
+        }
     </style>
 
 </head>
@@ -92,8 +124,51 @@
             'Recruiting Girl', 'Recruiting Manager', 'HR Director', 'Trainer', 'Coach', 'Guru',
             'Errand Boy', 'Cart Operator', 'Truck Driver', 'Zeppelin Pilot',
             'Marketing Trainee', 'Campaign Manager', 'Brand Manager', 'Brand Director',
-            'Kitchen Trainee', 'Burger Cook', 'Burger Chef', 'Pizza Cook', 'Pizza Chef'];
+            'Kitchen Trainee', 'Burger Cook', 'Burger Chef', 'Pizza Cook', 'Pizza Chef'
+        ];
 
+        const employee_color = {
+
+            'Waitress': 'purple', 
+            'New Business Developer': 'purple', 
+            'CFO': 'purple', 
+
+            'Local Manager': 'red', 
+            'Regional Manager': 'red',
+
+            'Management Trainee': 'black', 
+            'Junior Vice President': 'black', 
+            'Vice President': 'black', 
+            'Senior Vice President': 'black', 
+            'Executive Vice President': 'black',
+
+            'Pricing Manager': 'pink', 
+            'Luxuries Manager': 'pink', 
+            'Discount Manager': 'pink', 
+
+            'Recruiting Girl': 'gray',
+            'Recruiting Manager': 'gray',
+            'HR Director': 'gray',
+            'Trainer': 'gray',
+            'Coach': 'gray',
+            'Guru': 'gray',
+
+            'Errand Boy': 'green', 
+            'Cart Operator': 'green', 
+            'Truck Driver': 'green', 
+            'Zeppelin Pilot': 'green',
+
+            'Marketing Trainee': 'blue', 
+            'Campaign Manager': 'blue', 
+            'Brand Manager': 'blue', 
+            'Brand Director': 'blue',
+
+            'Kitchen Trainee': 'darkgreen', 
+            'Burger Cook': 'darkgreen', 
+            'Burger Chef': 'darkgreen', 
+            'Pizza Cook': 'darkgreen', 
+            'Pizza Chef': 'darkgreen',
+        };
         // function init() {
         //     let input = document.getElementById('file-input');
         //     input.onchange = e => {
@@ -274,6 +349,7 @@
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
+                                new_listitem.classList.add(employee_color[employees[e]])
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
@@ -293,6 +369,7 @@
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
+                                new_listitem.classList.add(employee_color[employees[e]])
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
@@ -312,6 +389,7 @@
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
+                                new_listitem.classList.add(employee_color[employees[e]])
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
@@ -331,6 +409,7 @@
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
+                                new_listitem.classList.add(employee_color[employees[e]])
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
@@ -350,6 +429,7 @@
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
+                                new_listitem.classList.add(employee_color[employees[e]])
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
