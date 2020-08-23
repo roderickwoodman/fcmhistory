@@ -34,6 +34,9 @@
             display: flex;
             flex-direction: column;
         }
+        .salaried::after {
+            content: " $";
+        }
         div.player_cell > ul:nth-child(1) { /* trains */
             height: 10rem;
         }
@@ -360,6 +363,9 @@
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
                                 new_listitem.classList.add(employee_color[employees[e]])
+                                if (salaried_employees.includes(employees[e])) {
+                                    new_listitem.classList.add('salaried');
+                                }
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
@@ -380,6 +386,9 @@
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
                                 new_listitem.classList.add(employee_color[employees[e]])
+                                if (salaried_employees.includes(employees[e])) {
+                                    new_listitem.classList.add('salaried');
+                                }
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
@@ -400,6 +409,9 @@
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
                                 new_listitem.classList.add(employee_color[employees[e]])
+                                if (salaried_employees.includes(employees[e])) {
+                                    new_listitem.classList.add('salaried');
+                                }
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
@@ -420,6 +432,9 @@
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
                                 new_listitem.classList.add(employee_color[employees[e]])
+                                if (salaried_employees.includes(employees[e])) {
+                                    new_listitem.classList.add('salaried');
+                                }
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
@@ -440,6 +455,9 @@
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
                                 new_listitem.classList.add(employee_color[employees[e]])
+                                if (salaried_employees.includes(employees[e])) {
+                                    new_listitem.classList.add('salaried');
+                                }
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
