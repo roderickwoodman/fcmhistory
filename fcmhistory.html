@@ -204,7 +204,7 @@
             // var lines = fc.split(/[\r\n]+/g);
             // var lines = file_content.split(/[\r\n]+/g);
             var lines = file_content.split(/[\r\n]+/g);
-            console.log('numlines='+lines.length);
+            // console.log('numlines='+lines.length);
             // console.log('lines='+lines);
             const timestamp_regex = /^[0-9]{4}[\/][0-9]{2}[\/][0-9]{2}/g;
             let messages = [];
@@ -259,7 +259,7 @@
 
 
             // console.log('ALL MESSAGES:', messages);
-            console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length);
+            // console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length);
             // console.log('content.length:',content.length);
             // console.log('turns:',turns);
             // console.log('restaurant:',restaurant);
@@ -315,7 +315,7 @@
                     continue;
                 }
                 // console.log('zb_turn_limits:',zb_turn_limits);
-                console.log('['+zb_turn_limits.length+'] TURN#'+(t+1));
+                // console.log('['+zb_turn_limits.length+'] TURN#'+(t+1));
 
                 // COLUMN: the round number
                 let new_row = document.createElement('div');
