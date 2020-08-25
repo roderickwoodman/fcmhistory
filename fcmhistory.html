@@ -398,12 +398,13 @@
 
                         let new_list = document.createElement('ul');
                         new_list.classList.add('trains');
-                        let new_listitem = document.createElement('li');
-                        new_listitem.innerHTML = 'trains:';
-                        new_listitem.classList.add('emphasis');
-                        new_list.appendChild(new_listitem);
+                        let new_hdrlistitem = document.createElement('li');
+                        new_hdrlistitem.innerHTML = 'trains';
+                        new_hdrlistitem.classList.add('emphasis');
+                        new_list.appendChild(new_hdrlistitem);
                         if (key_events[t][player_name].hasOwnProperty('trains')) {
                             let employees = key_events[t][player_name]['trains'];
+                            new_hdrlistitem.innerHTML += ' (' + employees.length + '):';
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
@@ -418,6 +419,7 @@
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
+                            new_hdrlistitem.innerHTML += ':';
                             let new_listitem = document.createElement('li');
                             new_listitem.innerHTML = '--';
                             new_list.appendChild(new_listitem);
@@ -426,12 +428,13 @@
 
                         new_list = document.createElement('ul');
                         new_list.classList.add('works');
-                        new_listitem = document.createElement('li');
-                        new_listitem.innerHTML = 'sends to work:';
-                        new_listitem.classList.add('emphasis');
-                        new_list.appendChild(new_listitem);
+                        new_hdrlistitem = document.createElement('li');
+                        new_hdrlistitem.innerHTML = 'sends to work';
+                        new_hdrlistitem.classList.add('emphasis');
+                        new_list.appendChild(new_hdrlistitem);
                         if (key_events[t][player_name].hasOwnProperty('works')) {
                             let employees = key_events[t][player_name]['works'];
+                            new_hdrlistitem.innerHTML += ' (' + employees.length + '):';
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
@@ -446,6 +449,7 @@
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
+                            new_hdrlistitem.innerHTML += ':';
                             let new_listitem = document.createElement('li');
                             new_listitem.innerHTML = '--';
                             new_list.appendChild(new_listitem);
@@ -454,12 +458,13 @@
 
                         new_list = document.createElement('ul');
                         new_list.classList.add('hires');
-                        new_listitem = document.createElement('li');
-                        new_listitem.innerHTML = 'hires:';
-                        new_listitem.classList.add('emphasis');
-                        new_list.appendChild(new_listitem);
+                        new_hdrlistitem = document.createElement('li');
+                        new_hdrlistitem.innerHTML = 'hires';
+                        new_hdrlistitem.classList.add('emphasis');
+                        new_list.appendChild(new_hdrlistitem);
                         if (key_events[t][player_name].hasOwnProperty('hires')) {
                             let employees = key_events[t][player_name]['hires'];
+                            new_hdrlistitem.innerHTML += ' (' + employees.length + '):';
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
@@ -474,6 +479,7 @@
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
+                            new_hdrlistitem.innerHTML += ':';
                             let new_listitem = document.createElement('li');
                             new_listitem.innerHTML = '--';
                             new_list.appendChild(new_listitem);
@@ -482,12 +488,13 @@
 
                         new_list = document.createElement('ul');
                         new_list.classList.add('markets');
-                        new_listitem = document.createElement('li');
-                        new_listitem.innerHTML = 'markets:';
-                        new_listitem.classList.add('emphasis');
-                        new_list.appendChild(new_listitem);
+                        new_hdrlistitem = document.createElement('li');
+                        new_hdrlistitem.innerHTML = 'markets';
+                        new_hdrlistitem.classList.add('emphasis');
+                        new_list.appendChild(new_hdrlistitem);
                         if (key_events[t][player_name].hasOwnProperty('markets')) {
                             let employees = key_events[t][player_name]['markets'];
+                            new_hdrlistitem.innerHTML += ' (' + employees.length + '):';
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
@@ -502,6 +509,7 @@
                                 new_list.appendChild(new_listitem);
                             }
                         } else {
+                            new_hdrlistitem.innerHTML += ':';
                             let new_listitem = document.createElement('li');
                             new_listitem.innerHTML = '--';
                             new_list.appendChild(new_listitem);
@@ -510,12 +518,13 @@
 
                         new_list = document.createElement('ul');
                         new_list.classList.add('fires');
-                        new_listitem = document.createElement('li');
-                        new_listitem.innerHTML = 'fires:';
-                        new_listitem.classList.add('emphasis');
-                        new_list.appendChild(new_listitem);
+                        new_hdrlistitem = document.createElement('li');
+                        new_hdrlistitem.innerHTML = 'fires';
+                        new_hdrlistitem.classList.add('emphasis');
+                        new_list.appendChild(new_hdrlistitem);
                         if (key_events[t][player_name].hasOwnProperty('fires')) {
                             let employees = key_events[t][player_name]['fires'];
+                            new_hdrlistitem.innerHTML += ' (' + employees.length + '):';
                             for (let e=0; e<employees.length; e++) {
                                 let new_listitem = document.createElement('li');
                                 new_listitem.innerHTML = employees[e];
