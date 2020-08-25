@@ -611,7 +611,14 @@
                         } else {
                             campaigns_started = JSON.parse(JSON.stringify(key_events[current_turn][player]['markets']));
                         }
-                        campaigns_started.push(line);
+                        let words = line.split(' ');
+                        let duration = 'eternally';
+                        if (words[words.length-1] !== 'eternally') {
+                            let start_idx = words.length - 3;
+                            duration = [words[5], words[start_idx], words[start_idx+1], words[start_idx+2]].join(' ');
+                        }
+
+                        campaigns_started.push(duration);
                         markets.push(idx);
                         key_events[current_turn][player]['markets'] = campaigns_started;
                     } else if (trains_regex.test(line)) {
