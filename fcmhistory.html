@@ -34,6 +34,9 @@
             display: flex;
             flex-direction: column;
         }
+        ul.hidden {
+            display: none;
+        }
         div.player_cell > ul > li { /* employees */
             position: relative;
             padding-left: 1.5rem;
@@ -230,8 +233,16 @@
         const fires_regex = /fires/g;
 
         function onCheckboxClick(event) {
-            console.log('clicked:', event.target);
-
+            let type = event.target.id;
+            let show = event.target.checked;
+            let ele = document.querySelectorAll('.'+type);
+            ele.forEach( function(element) {
+                if (!show) {
+                    element.classList.add('hidden');
+                } else {
+                    element.classList.remove('hidden');
+                }
+            })
         }
 
         // function parseContent(file_content) {
@@ -380,6 +391,7 @@
                     if (key_events[t].hasOwnProperty(player_name)) {
 
                         let new_list = document.createElement('ul');
+                        new_list.classList.add('trains');
                         let new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'trains:';
                         new_listitem.classList.add('emphasis');
@@ -407,6 +419,7 @@
                         new_cell.appendChild(new_list);
 
                         new_list = document.createElement('ul');
+                        new_list.classList.add('works');
                         new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'sends to work:';
                         new_listitem.classList.add('emphasis');
@@ -434,6 +447,7 @@
                         new_cell.appendChild(new_list);
 
                         new_list = document.createElement('ul');
+                        new_list.classList.add('hires');
                         new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'hires:';
                         new_listitem.classList.add('emphasis');
@@ -461,6 +475,7 @@
                         new_cell.appendChild(new_list);
 
                         new_list = document.createElement('ul');
+                        new_list.classList.add('markets');
                         new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'markets:';
                         new_listitem.classList.add('emphasis');
@@ -488,6 +503,7 @@
                         new_cell.appendChild(new_list);
 
                         new_list = document.createElement('ul');
+                        new_list.classList.add('fires');
                         new_listitem = document.createElement('li');
                         new_listitem.innerHTML = 'fires:';
                         new_listitem.classList.add('emphasis');
