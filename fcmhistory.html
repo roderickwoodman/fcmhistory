@@ -237,16 +237,8 @@
         // function parseContent(file_content) {
         function init() {
 
-            let cb_trains = document.getElementById('trains');
-            cb_trains.addEventListener("click", onCheckboxClick)
-            let cb_works = document.getElementById('works');
-            cb_works.addEventListener("click", onCheckboxClick)
-            let cb_hires = document.getElementById('hires');
-            cb_hires.addEventListener("click", onCheckboxClick)
-            let cb_markets = document.getElementById('markets');
-            cb_markets.addEventListener("click", onCheckboxClick)
-            let cb_fires = document.getElementById('fires');
-            cb_fires.addEventListener("click", onCheckboxClick)
+            let checkboxes = document.querySelectorAll('input[type=checkbox]');
+            checkboxes.forEach( cb => cb.addEventListener("click", onCheckboxClick) );
 
             // let fc = JSON.parse(JSON.stringify(file_content));
             // var lines = fc.split(/[\r\n]+/g);
