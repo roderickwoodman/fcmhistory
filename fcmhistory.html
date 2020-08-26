@@ -393,7 +393,7 @@
                     // further parse the employee string if training information is present
                     let trained_from;
                     if (key === 'trains') {
-                        train_info = employee.split(' from ');
+                        train_info = employee.trim().split(' from ');
                         employee = train_info[0];
                         trained_from = train_info[1];
                     }
