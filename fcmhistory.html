@@ -362,16 +362,46 @@
                 let employees = key_events[round][player_name][key];
                 new_hdrlistitem.innerHTML += ' (' + employees.length + '):';
                 for (let e=0; e<employees.length; e++) {
+                    let employee = employees[e];
+
+                    // further parse the employee string if training information is present
+                    let trained_from;
+                    if (key === 'trains') {
+                        train_info = employee.split(' from ');
+                        employee = train_info[0];
+                        trained_from = train_info[1];
+                    }
+
+                    // record the employee
                     let new_listitem = document.createElement('li');
-                    new_listitem.innerHTML = employees[e];
-                    new_listitem.classList.add(employee_color[employees[e]])
-                    if (salaried_employees.includes(employees[e])) {
+                    new_listitem.innerHTML = employee;
+                    new_listitem.classList.add(employee_color[employee])
+
+                    // record the training level increment, if applicable
+                    if (key === 'trains') {
+                        let num_steps = 1;
+                        if (training_steps.hasOwnProperty(employee)) {
+                            if (training_steps[employee].hasOwnProperty(trained_from)) {
+                                num_steps = training_steps[employee][trained_from];
+                            }
+                        }
+                        if (num_steps > 1) {
+                            let new_flag = document.createElement('div');
+                            let new_flag_textnode = document.createTextNode('+' + num_steps);
+                            new_flag.appendChild(new_flag_textnode);
+                            new_listitem.appendChild(new_flag);
+                        }
+                    }
+
+                    // record the salary, if applicable
+                    if (key !== 'trains' && salaried_employees.includes(employee)) {
                         new_listitem.classList.add('salaried');
                         let new_flag = document.createElement('div');
                         let new_flag_textnode = document.createTextNode('$');
                         new_flag.appendChild(new_flag_textnode);
                         new_listitem.appendChild(new_flag);
                     }
+
                     new_list.appendChild(new_listitem);
                 }
             } else {
@@ -620,12 +650,7 @@
                         if (!key_events[current_turn][player].hasOwnProperty('trains')) {
                             key_events[current_turn][player]['trains'] = [];
                         }
-                        let employees_trained = [];
-                        let each_trained_str = line.split(' : ')[1].split(',');
-                        each_trained_str.forEach(function(one_trained_str) {
-                            let to_from = one_trained_str.split(' from ');
-                            employees_trained.push(to_from[0]);
-                        })
+                        let employees_trained = line.split(' : ')[1].split(',');
                         trains.push(idx);
                         key_events[current_turn][player]['trains'] = employees_trained;
                     } else if (hires_regex.test(line)) {
