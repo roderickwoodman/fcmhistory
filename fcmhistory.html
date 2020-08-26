@@ -167,6 +167,106 @@
             'Burger Cook', 'Burger Chef', 'Pizza Cook', 'Pizza Chef'
         ];
 
+        const training_steps = {
+            'New Business Developer': {
+                'Management Trainee' : 1,
+            },
+            'Junior Vice President': {
+                'Management Trainee': 1,
+            },
+            'Luxuries Manager': {
+                'Management Trainee': 1,
+            },
+            'Local Manager': {
+                'Management Trainee': 2,
+                'Junior Vice President': 1,
+            },
+            'Vice President': {
+                'Management Trainee': 2,
+                'Junior Vice President': 1,
+            },
+            'Discount Manager': {
+                'Management Trainee': 2,
+                'Junior Vice President': 1,
+            },
+            'Recruiting Manager': {
+                'Management Trainee': 2,
+                'Junior Vice President': 1,
+            },
+            'Coach': {
+                'Management Trainee': 2,
+                'Junior Vice President': 1,
+            },
+            'Regional Manager': {
+                'Management Trainee': 3,
+                'Junior Vice President': 2,
+                'Vice President': 1,
+            },
+            'Senior Vice President': {
+                'Management Trainee': 3,
+                'Junior Vice President': 2,
+                'Vice President': 1,
+            },
+            'Guru': {
+                'Management Trainee': 3,
+                'Junior Vice President': 2,
+                'Vice President': 1,
+            },
+            'CFO': {
+                'Junior Vice President': 3,
+                'Vice President': 2,
+                'Senior Vice President': 1,
+            },
+            'Executive Vice President': {
+                'Junior Vice President': 3,
+                'Vice President': 2,
+                'Senior Vice President': 1,
+            },
+            'HR Director': {
+                'Junior Vice President': 3,
+                'Vice President': 2,
+                'Senior Vice President': 1,
+            },
+            'Cart Operator': {
+                'Errand Boy': 1,
+            },
+            'Truck Driver': {
+                'Errand Boy': 2,
+                'Cart Operator': 1,
+            },
+            'Zeppelin Pilot': {
+                'Errand Boy': 3,
+                'Cart Operator': 2,
+                'Truck Driver': 1,
+            },
+            'Campaign Manager': {
+                'Marketing Trainee': 1,
+            },
+            'Brand Manager': {
+                'Marketing Trainee': 2,
+                'Campaign Manager': 1,
+            },
+            'Brand Director': {
+                'Marketing Trainee': 3,
+                'Campaign Manager': 2,
+                'Brand Manager': 1,
+            },
+            'Burger Cook': {
+                'Kitchen Trainee': 1,
+            },
+            'Burger Chef': {
+                'Kitchen Trainee': 2,
+                'Burger Cook': 1,
+            },
+            'Pizza Cook': {
+                'Kitchen Trainee': 1,
+            },
+            'Pizza Chef': {
+                'Kitchen Trainee': 2,
+                'Pizza Cook': 1,
+            },
+        }
+
         const employee_color = {
 
             'Waitress': 'purple', 
@@ -617,7 +717,6 @@
                             let start_idx = words.length - 3;
                             duration = [words[5], words[start_idx], words[start_idx+1], words[start_idx+2]].join(' ');
                         }
-
                         campaigns_started.push(duration);
                         markets.push(idx);
                         key_events[current_turn][player]['markets'] = campaigns_started;
