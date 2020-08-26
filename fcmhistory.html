@@ -169,6 +169,24 @@
             'Burger Cook', 'Burger Chef', 'Pizza Cook', 'Pizza Chef'
         ];
 
+        const marketing_map = {
+            '#1': 'radio',
+            '#2': 'radio',
+            '#3': 'radio',
+            '#4': 'airplane',
+            '#5': 'airplane',
+            '#6': 'airplane',
+            '#7': 'mailbox',
+            '#8': 'mailbox',
+            '#9': 'mailbox',
+            '#10': 'mailbox',
+            '#11': 'billboard',
+            '#12': 'billboard',
+            '#13': 'billboard',
+            '#14': 'billboard',
+            '#15': 'billboard',
+            '#16': 'billboard',
+        }
         const training_steps = {
             'New Business Developer': {
                 'Management Trainee' : 1,
@@ -642,10 +660,13 @@
                             campaigns_started = JSON.parse(JSON.stringify(key_events[current_turn][player]['markets']));
                         }
                         let words = line.split(' ');
+                        let marketing_type = marketing_map[words[5]];
                         let duration = 'eternally';
                         if (words[words.length-1] !== 'eternally') {
                             let start_idx = words.length - 3;
-                            duration = [words[5], words[start_idx], words[start_idx+1], words[start_idx+2]].join(' ');
+                            duration = [marketing_type, words[start_idx], words[start_idx+1], words[start_idx+2]].join(' ');
+                        } else {
+                            duration = marketing_type + ' eternally';
                         }
                         campaigns_started.push(duration);
                         markets.push(idx);
