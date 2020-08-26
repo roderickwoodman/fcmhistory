@@ -45,12 +45,14 @@
         }
         div.player_cell > ul > li { /* employees */
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 2rem;
         }
-        div.player_cell > ul > li > div {
+        div.player_cell .flag {
             position: absolute;
             left: 0.5rem;
             top: 0;
+            width: 1rem;
+            text-align: center;
         }
         div.player_cell > ul:nth-child(1) { /* trains */
             height: 10rem;
@@ -387,6 +389,7 @@
                         }
                         if (num_steps > 1) {
                             let new_flag = document.createElement('div');
+                            new_flag.classList.add('flag');
                             let new_flag_textnode = document.createTextNode('+' + num_steps);
                             new_flag.appendChild(new_flag_textnode);
                             new_listitem.appendChild(new_flag);
@@ -397,6 +400,7 @@
                     if (key !== 'trains' && salaried_employees.includes(employee)) {
                         new_listitem.classList.add('salaried');
                         let new_flag = document.createElement('div');
+                        new_flag.classList.add('flag');
                         let new_flag_textnode = document.createTextNode('$');
                         new_flag.appendChild(new_flag_textnode);
                         new_listitem.appendChild(new_flag);
