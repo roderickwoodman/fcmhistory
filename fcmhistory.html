@@ -724,8 +724,12 @@
                         if (!key_events[current_turn][player].hasOwnProperty('trains')) {
                             key_events[current_turn][player]['trains'] = [];
                         }
-                        let parts = line.split(' : ');
-                        let employees_trained = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*\sfrom\s[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
+                        let employees_trained = [];
+                        let each_trained_str = line.split(' : ')[1].split(',');
+                        each_trained_str.forEach(function(one_trained_str) {
+                            let to_from = one_trained_str.split(' from ');
+                            employees_trained.push(to_from[0]);
+                        })
                         trains.push(idx);
                         key_events[current_turn][player]['trains'] = employees_trained;
                     } else if (hires_regex.test(line)) {
