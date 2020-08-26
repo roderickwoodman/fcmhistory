@@ -45,7 +45,7 @@
         }
         div.player_cell > ul > li { /* employees */
             position: relative;
-            padding-left: 2rem;
+            padding: 1px 0 1px 2rem;
         }
         div.player_cell .flag {
             position: absolute;
@@ -53,6 +53,12 @@
             top: 0;
             width: 1rem;
             text-align: center;
+        }
+        div.player_cell .flag.training {
+            padding: 0 2px;
+            border: 1px solid red;
+            background-color: rgb(255,255,255,0.85);
+            color: red;
         }
         div.player_cell > ul:nth-child(1) { /* trains */
             height: 10rem;
@@ -408,6 +414,7 @@
                         if (num_steps > 1) {
                             let new_flag = document.createElement('div');
                             new_flag.classList.add('flag');
+                            new_flag.classList.add('training');
                             let new_flag_textnode = document.createTextNode('+' + num_steps);
                             new_flag.appendChild(new_flag_textnode);
                             new_listitem.appendChild(new_flag);
