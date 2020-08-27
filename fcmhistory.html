@@ -113,13 +113,13 @@
 
 <body onload="init()">
 
-    <!--
+    
     <h1>Hello World!</h1>
     <form onsubmit="onUpload()">
         <input id="file-input" type="file" />
         <button type="submit">Upload</button>
     </form>
-    -->
+   
 
     <section id="controls">
         <label for="trains">Trains</label>
@@ -360,24 +360,24 @@
             'Pizza Cook': 'darkgreen', 
             'Pizza Chef': 'darkgreen',
         };
-        // function init() {
-        //     let input = document.getElementById('file-input');
-        //     input.onchange = e => {
-        //         file = e.target.files[0];
-        //     }
-        // }
+        function init() {
+            let input = document.getElementById('file-input');
+            input.onchange = e => {
+                file = e.target.files[0];
+            }
+        }
 
-        // function onUpload() {
-        //     event.preventDefault()
+        function onUpload() {
+            event.preventDefault()
 
-        //     let reader = new FileReader();
-        //     reader.readAsText(file, 'UTF-8');
-        //     reader.onload = readerEvent => {
-        //         let file_content = readerEvent.target.result;
-        //         parseContent(file_content);
-        //         displayData();
-        //     }
-        // }
+            let reader = new FileReader();
+            reader.readAsText(file, 'UTF-8');
+            reader.onload = readerEvent => {
+                let file_content = readerEvent.target.result;
+                parseContent(file_content);
+                // displayData();
+            }
+        }
 
         const turns_regex = /Start of turn/g;
         const restaurant_regex = /restaurant/g;
@@ -467,8 +467,8 @@
             return new_list;
         }
 
-        // function parseContent(file_content) {
-        function init() {
+        function parseContent(file_content) {
+        // function init() {
 
             let checkboxes = document.querySelectorAll('input[type=checkbox]');
             checkboxes.forEach( cb => cb.addEventListener("click", onCheckboxClick) );
@@ -769,7 +769,7 @@
             }
         }
 
-        const file_content = 
+        const file_content_hardcoded = 
         `
         Start of turn 9
 2020/08/13 16:37:21
