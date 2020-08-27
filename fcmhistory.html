@@ -655,16 +655,33 @@
         }
 
         function sortEmployees(unsorted) {
-            let sorted = unsorted.sort( function(a,b) {
-                if (employee_order[a.trim()] < employee_order[b.trim()]) {
+            let clean_unsorted = [];
+            for (let ele of unsorted) {
+                let parts = ele.split(' from ');
+                let new_tofrom = {
+                    to: null,
+                    from: null,
+                    full: null,
+                }
+                new_tofrom.to = parts[0].trim();
+                new_tofrom.full = parts[0].trim();
+                if (parts.length > 1) {
+                    new_tofrom.from = parts[1].trim();
+                    new_tofrom.full += ' from ' + parts[1].trim();
+                }
+                clean_unsorted.push(new_tofrom);
+            }
+            let sorted = clean_unsorted.sort( function(a,b) {
+                if (employee_order[a.to] < employee_order[b.to]) {
                     return -1;
-                } else if (employee_order[a.trim()] > employee_order[b.trim()]) {
+                } else if (employee_order[a.to] > employee_order[b.to]) {
                     return 1;
                 } else {
                     return 0;
                 }
             })
-            return sorted;
+            let ret_array = sorted.map( ele => ele.full );
+            return ret_array;
         }
 
         function parseEvent(idx, line) {
@@ -697,7 +714,7 @@
                         let employees_working = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
                         let sorted_employees_working = sortEmployees(employees_working);
                         works.push(idx);
-                        key_events[current_turn][player]['works'] = employees_working;
+                        key_events[current_turn][player]['works'] = sorted_employees_working;
                     } else if (markets_regex.test(line)) {
                         let campaigns_started = [];
                         if (!key_events[current_turn][player].hasOwnProperty('markets')) {
@@ -722,16 +739,18 @@
                             key_events[current_turn][player]['trains'] = [];
                         }
                         let employees_trained = line.split(' : ')[1].split(',');
+                        let sorted_employees_trained = sortEmployees(employees_trained);
                         trains.push(idx);
-                        key_events[current_turn][player]['trains'] = employees_trained;
+                        key_events[current_turn][player]['trains'] = sorted_employees_trained;
                     } else if (hires_regex.test(line)) {
                         if (!key_events[current_turn][player].hasOwnProperty('hires')) {
                             key_events[current_turn][player]['hires'] = [];
                         }
                         let parts = line.split(' : ');
                         let employees_hired = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
+                        let sorted_employees_hired = sortEmployees(employees_hired);
                         hires.push(idx);
-                        key_events[current_turn][player]['hires'] = employees_hired;
+                        key_events[current_turn][player]['hires'] = sorted_employees_hired;
                     } else if (fires_regex.test(line)) {
                         if (line.includes(':')) {
                             if (!key_events[current_turn][player].hasOwnProperty('fires')) {
@@ -739,8 +758,9 @@
                             }
                             let parts = line.split(' : ');
                             let employees_fired = parts[1].match(/[A-Z][a-z]+(\s[A-Z][a-z]+)*/g);
+                            let sorted_employees_fired = sortEmployees(employees_fired);
                             fires.push(idx);
-                            key_events[current_turn][player]['fires'] = employees_fired;
+                            key_events[current_turn][player]['fires'] = sorted_employees_fired;
                         }
                     }
                 } else {
