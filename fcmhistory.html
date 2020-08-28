@@ -141,8 +141,6 @@
         let file;
         var content = [];
         let turns = [], zb_turn_limits = [];
-        let restaurant = [];
-        let uses = [];
         let plays = [];
         let works = [];
         let markets = [];
@@ -380,8 +378,6 @@
         }
 
         const turns_regex = /Start of turn/g;
-        const restaurant_regex = /restaurant/g;
-        const uses_regex = /uses his\/her team :/g;
         const plays_regex = /(chooses to play|has to play)/g;
         const works_regex = /sends to work/g;
         const markets_regex = /started the marketing campaign/g;
@@ -535,8 +531,6 @@
             // console.log('LINES=' + lines.length + ' MESSAGES=' + messages.length);
             // console.log('content.length:',content.length);
             // console.log('turns:',turns);
-            // console.log('restaurant:',restaurant);
-            // console.log('uses:',uses);
             // console.log('plays:',plays);
             // console.log('works:',works);
             // console.log('markets:',markets);
@@ -546,8 +540,6 @@
             // console.log('other:',other);
             // console.log('players=',players);
             console.log('turns='+turns.length
-                +' restaurant='+restaurant.length
-                +' uses='+uses.length
                 +' plays='+plays.length
                 +' works='+works.length
                 +' markets='+markets.length
@@ -700,11 +692,7 @@
                         let new_player_events = {};
                         key_events[current_turn][player] = new_player_events;
                     }
-                    if (restaurant_regex.test(line)) {
-                        restaurant.push(idx);
-                    } else if (uses_regex.test(line)) {
-                        uses.push(idx);
-                    } else if (plays_regex.test(line)) {
+                    if (plays_regex.test(line)) {
                     //    plays.push(idx);
                     } else if (works_regex.test(line)) {
                         if (!key_events[current_turn][player].hasOwnProperty('works')) {
